@@ -14,6 +14,7 @@ Based on the **SparkFun TMP117 Arduino Library** by Madison Chodikov,this librar
   Datasheet: [TMP117 Datasheet](https://www.ti.com/lit/gpn/TMP117)
 - **SparkFun TMP117 Board**: [SparkFun SEN-15805](https://www.sparkfun.com/products/15805)
 - **Raspberry Pi Pico Documentation**: [Pico Documentation](https://www.raspberrypi.com/documentation/microcontrollers/)
+- **Raspberry Pi Pico SDK**: [Pico SDK](https://github.com/raspberrypi/pico-sdk)
 
 ---
 
