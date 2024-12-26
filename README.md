@@ -5,7 +5,7 @@ This version is for use as an INTERFACE library to the Raspberry Pi Pico SDK
 Based on the SparkFun TMP117 Arduino Library and ported to the Raspberry Pi Pico C SDK by Madison Chodikov.
 The basics of the original Library remains but much of it has changed in this version.
 This port is written in C, by breaker (name on the Raspberry Pi Forum).
-This was written to use my sensor with the SDK and learn it a bit along the way.
+This was written to use my sensor breakout with the SDK and learn it a bit along the way.
 
 Tested with the Raspberry Pi Pico H, Pimoroni Pico Plus 2 (RP2350), and SparkFun SEN-15805.
 Texas Instruments TMP117 High-Accuracy, Low-Power, Digital Temperature Sensor With SMBus™- and I2C-Compatible Interface
