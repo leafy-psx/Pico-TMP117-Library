@@ -2,7 +2,7 @@ TMP117 library for Raspberry Pi Pico C SDK
 ================================================================================
 This version is for use as an INTERFACE library to the Raspberry Pi Pico SDK
 
-Based on the SparkFun TMP117 Arduino Library and ported to the Raspberry Pi Pico C SDK by Madison Chodikov
+Based on the SparkFun TMP117 Arduino Library and ported to the Raspberry Pi Pico C SDK by Madison Chodikov.
 The basics of the original Library remains but much of it has changed in this version.
 This port is written in C, by breaker (name on the Raspberry Pi Forum).
 This was written to use my sensor with the SDK and learn it a bit along the way.
