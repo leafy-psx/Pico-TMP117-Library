@@ -1,4 +1,4 @@
-# Top level CMakeLists.txt in tmp117
+# Top level CMakeLists.txt of Pico-TMP117-Library
 
 # Minimum required CMake version
 cmake_minimum_required(VERSION 3.13)
