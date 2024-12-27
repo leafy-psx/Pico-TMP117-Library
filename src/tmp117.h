@@ -9,12 +9,6 @@
 
 // Original SparkFun TMP117 Arduino Library file: SparkFunTMP117.h
 
-/* A big thank you Madison Chodikov @ SparkFun Electronics for writing the SparkFun TMP117 Qwiic Arduino library
- * This is my attempt at a port for the Raspberry Pi Pico using the Raspberry Pi Pico C/C++ SDK (interface library type).
- * I have modified the way some things are achieved with the sensor, and added EEPROM programming functions.
- * Please read the TMP117 datasheet. Test boards used; SparkFun TMP117 Qwiic, and Rasberry Pi Pico.
- * See the temp_result_cc example for how to read and display the temperature in Celsius without using floating point math. */
-
 // This version is for use as an INTERFACE library to the Raspberry Pi Pico SDK
 
 #ifndef TMP117_H

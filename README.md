@@ -78,6 +78,6 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
 ---
 
 ## Acknowledgments
-A big thank you to Madison Chodikov @ SparkFun Electronics for writing the original SparkFun TMP117 Qwiic Arduino library and board design.
+Thank you to Madison Chodikov @ SparkFun Electronics for writing the original SparkFun TMP117 Qwiic Arduino library and board design. Thanks to kilograham and all contributors to the Raspberry Pi Pico SDK.
 
 See `LICENSE.txt` for licensing details.
