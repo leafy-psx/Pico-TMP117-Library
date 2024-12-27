@@ -52,8 +52,9 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
 - Reading the **temperature result** or **configuration register** clears the **data ready flag**.
 - In **one-shot mode**, ensure the temperature register is not read before the configuration register to avoid prematurely clearing the data ready flag.
 
-### EEPROM
-- Factory default: **8 temperature conversions averaged per second**.
+### Factory defaults and EEPROM
+- Factory default: **8 averaged temperature conversions, conversion cycle time 1 second in CC mode**.
+- See table **Table 7-7. Conversion Cycle Time in CC Mode** in the datasheet for details.
 - Averaging is supported in both continuous and one-shot modes.  
   See section **7.3.2 Averaging** in the datasheet for details.
 - **EEPROM Write Limits**: Typical lifespan is **50,000 writes** (minimum **1,000 writes**).  
@@ -64,6 +65,7 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
 ## I2C Details
 - Possible TMP117 I2C addresses: **0x48, 0x49, 0x4A, 0x4B** (set via jumpers on the SparkFun board).  
   Default address is **0x48** unless changed using the `set_address()` function.
+- Use `tmp117_set_instance()` to easily change I2C instance instead of using a board file, if desired.
 
 **Note**: The device requires **1.5 ms** to power up before conversions can begin.
 

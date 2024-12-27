@@ -42,7 +42,7 @@ Distributed as-is; no warranty is given.
 // Static variable to hold the TMP117 address
 static uint8_t tmp117_address = TMP117_DEFAULT_ADDRESS;
 // variable to set the I2C instance to be used by tmp117_set_instance()
-i2c_inst_t *i2c_instance = i2c0;  // Default to i2c0
+i2c_inst_t *i2c_instance = i2c_default;  // Default to board file I2C instance
 // Track the last used pointer register, 0x09 as an invalid initial value
 static uint8_t last_pointer = 0x09;
 

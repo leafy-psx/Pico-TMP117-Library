@@ -103,7 +103,7 @@ int main(void) {
     gpio_put(TMP117_LED_PIN, 0);
     #endif
 
-    // Selects I2C instance (i2c0 is set as default in the tmp117.c)
+    // Selects I2C instance (i2c_default is set as default in the tmp117.c)
     //tmp117_set_instance(i2c1); // change to i2c1 as needed
 
     #if !defined(i2c_default) || !defined(PICO_DEFAULT_I2C_SDA_PIN) || !defined(PICO_DEFAULT_I2C_SCL_PIN)
