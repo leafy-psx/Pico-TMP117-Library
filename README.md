@@ -39,8 +39,10 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
 1. **Defined Types and Enumerations**: Many function parameters now use types and enumerations for clarity. See `tmp117.h` for details.
 2. **Efficient Register Reads**: The `read_register` function tracks the last pointer register written to. This avoids unnecessary writes to the pointer register.
 3. **EEPROM Writes**: Writes to registers are **volatile** unless EEPROM programming is used.
-4. **New Functions**:
+4. **New Functions and Examples**:
    - Raw temperature register read for Q notation display.
+   - one-shot mode examples
+   - Alert pin usage as a Data Ready interrupt
    - SMBus alert response example.
    - EEPROM programming functions and examples.
 
