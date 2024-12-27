@@ -93,7 +93,7 @@ int main(void) {
 
         // 1) typecast temp_result register to integer, converting from two's complement
         // 2) Multiply by 100 to scale the temperature (i.e. 2 decimal places)
-        // 3) Shift right by 7 to account for the TMP117's 1/128 resolution (Q7 format), converting to degrees Celsius
+        // 3) Shift right by 7 to account for the TMP117's 1/128 resolution (Q7 format)
         int temp = read_temp_raw() * 100 >> 7;
 
         // Display the temperature in degrees Celsius, formatted to show two decimal places.
@@ -104,7 +104,7 @@ int main(void) {
         printf("Temperature: %d.%02d °C \t%.2f °F\n", temp / 100, (temp < 0 ? -temp : temp) % 100, calc_temp_fahrenheit(temp_float));
 
         // floating point functions are also available for converting temp_result to Cesius or Fahrenheit directly
-        // printf("\nTemperature: %.2f °C\t%.2f °F",read_temp_celsius(),read_temp_fahrenheit());
+        // printf("\nTemperature: %.2f °C\t%.2f °F", read_temp_celsius(), read_temp_fahrenheit());
 
         // sleep_ms(EXTRA_DELAY_MS); // optional extra delay when cycle time is too fast, avoid < 1s due to SHE
     }

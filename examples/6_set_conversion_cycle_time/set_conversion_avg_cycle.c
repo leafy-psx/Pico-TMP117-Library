@@ -61,6 +61,8 @@ time in the conversion cycle.
 #include <stdint.h>
 
 #define SERIAL_INIT_DELAY_MS 1000 // change to suit serial interface used
+#define TMP117_I2C_SDA_PIN PICO_DEFAULT_I2C_SDA_PIN // set to a different SDA pin as needed
+#define TMP117_I2C_SCL_PIN PICO_DEFAULT_I2C_SCL_PIN // set to a different SCL pin as needed
 
 volatile bool input_available = false; // Flag to indicate if input is available
 volatile char input_char = 0; // Variable to store the input character
@@ -92,9 +94,16 @@ int main() {
     // set up serial and I2C
     stdio_init_all();
     sleep_ms(SERIAL_INIT_DELAY_MS);
+
+    // uncomment below to set I2C address other than 0x48 (e.g., 0x49)
+    //tmp117_set_address(0x49);
+
+    // Selects I2C instance (i2c_default is set as default in the tmp117.c)
+    //tmp117_set_instance(i2c1); // change to i2c1 as needed
+
     i2c_init(i2c_instance, 400 * 1000);
-    gpio_set_function(PICO_DEFAULT_I2C_SDA_PIN, GPIO_FUNC_I2C);
-    gpio_set_function(PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C);
+    gpio_set_function(TMP117_I2C_SDA_PIN, GPIO_FUNC_I2C);
+    gpio_set_function(TMP117_I2C_SCL_PIN, GPIO_FUNC_I2C);
         
     printf("\n\nExample 6: Setting Conversion Cycle Time and Averaging modes");
 

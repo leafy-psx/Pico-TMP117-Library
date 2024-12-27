@@ -87,8 +87,8 @@ int main(void) {
         } while (!data_ready()); // check if the data ready flag is high
 
         /* 1) typecast temp_result register to integer, converting from two's complement
-         * 2) Multiply by 100 to scale the temperature (i.e. 2 decimal places)
-         * 3) Shift right by 7 to account for the TMP117's 1/128 resolution (Q7 format), converting to degrees Celsius */
+           2) Multiply by 100 to scale the temperature (i.e. 2 decimal places)
+           3) Shift right by 7 to account for the TMP117's 1/128 resolution (Q7 format) */
         int temp = read_temp_raw() * 100 >> 7;
         // Display the temperature in degrees Celsius, formatted to show two decimal places.
         printf("Temperature: %d.%02d °C\n", temp / 100, (temp < 0 ? -temp : temp) % 100);

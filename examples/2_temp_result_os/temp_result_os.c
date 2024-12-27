@@ -4,14 +4,13 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
+
 /* This library assumes I2C address 0x48, use set_address() to change.
    The possible i2C addresses for TMP117 are; 0x48, 0x49, 0x4A, 0x4B */
 
-/* This example will read the raw temperature result register, cast to an integer to
-    make sure negative values are displayed correctly.
+/* This example will read the raw temperature result register, cast to an integer.
    The printing of Celsius is a no-float temperature reading using Q notation.
-   The conversion to Fahrenheit uses floating point math, unfortunately
-*/
+   The conversion to Fahrenheit uses floating point math, unfortunately */
 
 #include "tmp117.h"
 #include "tmp117_registers.h"

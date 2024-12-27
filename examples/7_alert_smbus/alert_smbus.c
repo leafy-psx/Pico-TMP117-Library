@@ -10,7 +10,7 @@
 
 // WIRING: Choose an available GPIO pin on your RP2040 / Pico Board 
 // edit the #define TMP117_ALERT_PIN below, wire this the TMP117 alert pin.
-// NOTE: The Sparkfun breakout has a 10k pull-up resistor necessary to hold the pin high.
+// NOTE: Most TMP117 breakouts have the pull-up resistor necessary to hold the pin high.
 
 #include "tmp117.h"
 #include "tmp117_registers.h"

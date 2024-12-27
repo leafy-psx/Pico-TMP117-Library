@@ -5,25 +5,27 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-/* This library assumes I2C address 0x48, use set_address() to change.
-   The possible i2C addresses for TMP117 are; 0x48, 0x49, 0x4A, 0x4B */
+// TO DO: add OLED or 16x2 character display functionality
 
-/* This example will read the raw temperature result register, cast to an integer to
-    make sure negative values are displayed correctly.
+/* This library assumes I2C address 0x48, use set_address() to change.
+   The possible i2C addresses for TMP117 are; 0x48, 0x49, 0x4A, 0x4B
+
+   This example will read the raw temperature result register,
+   cast to an integer to make sure negative values are displayed correctly.
    The printing of Celsius is a no-float temperature reading using Q notation.
-   The conversion to Fahrenheit uses floating point math, unfortunately
+   The conversion to Fahrenheit uses floating point math, unfortunately.
 
    This example shows the use of the Alert pin to reflect the status of the data ready flag
    and interrupt the Pico on the defined alert pin GPIO using an interrupt callback function.
-*/
-/* - Reading the configuration register clears the High Alert and Low Alert flags
- * - Reading the configuration or temperature result registers clears the Data Ready flag. */
 
-// TODO add OLED functionality
+   Reading the configuration register clears the High Alert and Low Alert flags
+   Reading the configuration or temperature result registers clears the Data Ready flag.
 
-// WIRING: Choose an available GPIO pin on your RP2040 / Pico Board 
-// edit the #define TMP117_ALERT_PIN below, wire this the TMP117 alert pin.
-// NOTE: The Sparkfun breakout has a 10k pull-up resistor necessary to hold the pin high.
+   WIRING: Choose an available GPIO pin on your RP2040 / RP2350 board
+   edit the #define TMP117_ALERT_PIN below, wire this the TMP117 alert pin.
+   Either solder a header onto TMP117 or solder 1 wire from INT to Pico board.
+
+   NOTE: Most TMP117 breakouts have the pull-up resistor necessary to hold the pin high. */
 
 #include "tmp117.h"
 #include "tmp117_registers.h"
@@ -32,6 +34,9 @@
 #include "hardware/i2c.h"
 #include <stdbool.h>
 #include <stdint.h>
+
+// Set to desired GPIO pin for TMP117 ALERT (Interrupt)
+#define TMP117_ALERT_PIN 7
 
 #define SERIAL_INIT_DELAY_MS 1000 // change to suit serial interface used
 
@@ -59,10 +64,6 @@
 #define TMP117_MODE_DELAY_MS 1
 #define TMP117_CONVERSION_DELAY_MS 125 // 125ms (AVG[1:0] default 01)
 
-// Pico GPIO pin for TMP117 ALERT (Interrupt)
-//#define TMP117_ALERT_PIN 22
-#define TMP117_ALERT_PIN 7
-
 // variable for checking I2C frequency
 int frequency = 0;
 
@@ -72,7 +73,7 @@ bool data_ready_flag = 0;
 // variable to hold conversion delay
 uint32_t delay_ms = 0;
 
-// prototype: Interrupt callback for DataAlert pin (data ready)
+// Interrupt callback for DataAlert pin (data ready)
 void data_alert_callback(uint gpio, uint32_t events);
 
 // functions to check I2C on Pico and if I2C connection to TMP117 is OK
@@ -110,7 +111,7 @@ int main(void) {
         #warning temp_result_os_interrupt example requires a board with I2C pins
         puts("I2C pins were not defined");
     #else
-    // initialize I2C0 (default) put return into variable freq
+    // initialize I2C and put return into variable freq
     frequency = i2c_init(i2c_instance, 400 * 1000); // TMP117 400 kHz max.
     // configure the GPIO pins for I2C
     gpio_set_function(TMP117_I2C_SDA_PIN, GPIO_FUNC_I2C);
@@ -156,7 +157,7 @@ int main(void) {
     printf(": %s ", convert_avg_mode(avg_mode));
     printf("(conversion delay in ms: %d)\n",delay_ms);
 
-while(1) {
+    while(1) {
     // Set TMP117 to one-shot mode
     set_oneshot_mode();
     
@@ -177,7 +178,8 @@ while(1) {
     // Also, convert to Fahrenheit and display on the same line (uses floating point math).
     float temp_float = temp / 100.0;
     printf("Temperature: %d.%02d °C \t%.2f °F\n", temp / 100, (temp < 0 ? -temp : temp) % 100, calc_temp_fahrenheit(temp_float));
-}
+    }
+    
     // The below is if one-shot mode is set to run only one or more times instead of forever
     while (1) {
         tight_loop_contents();
