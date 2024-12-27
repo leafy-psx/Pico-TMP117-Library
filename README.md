@@ -4,7 +4,7 @@ This version is designed as an **INTERFACE** library for the Raspberry Pi Pico S
 
 Based on the **SparkFun TMP117 Arduino Library** by Madison Chodikov, this library has been ported to the Raspberry Pi Pico C SDK. While the basics of the original library remain, much has changed in this version. It was developed for personal use with the TMP117 sensor and as an opportunity to learn the Pico SDK.
 
-## Tested Platforms
+## Test boards
 - **Raspberry Pi Pico H (RP2040)**
 - **Pimoroni Pico Plus 2 (RP2350)**
 - **SparkFun SEN-15805 (TMP117)**
