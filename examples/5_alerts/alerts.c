@@ -8,38 +8,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-// Original SparkFun TMP117 Arduino Library header:
-
-/******************************************************************************
-  Example2_AlertStatuses.ino
-  Example for the TMP117 I2C Temperature Sensor
-  Modified by: Ho Yun "Bobby" Chan @ SparkFun Electronics
-  Date Modified: November 12, 2019
-  Written by: Madison Chodikov @ SparkFun Electronics
-  Date: May 29 2019
-  ~
-
-  This sketch sets the TMP117 temperature sensor's high limit,
-  low limit, and alert function mode. Once set, we read the 
-  temperature in °C and checks alert status. If we are outside
-  of the boundary, we will output a message indicating
-  that we are beyond the limit. The alert statuses is dependent
-  on the mode so make sure to 
-  
-
-  Resources:
-  Wire.h (included with Arduino IDE)
-  SparkFunTMP117.h (included in the src folder) http://librarymanager/All#SparkFun_TMP117
-
-  Development environment specifics:
-  Arduino 1.8.9+
-  Hardware Version 1.0.0
-
-  This code is beerware; if you see me (or any other SparkFun employee) at
-  the local, and you've found our code helpful, please buy us a round!
-
-  Distributed as-is; no warranty is given.
-******************************************************************************/
+// Original SparkFun TMP117 Arduino Library file: Example2_AlertStatuses.ino
 
 /**
  * @file alerts.c
@@ -70,8 +39,8 @@
  * - Reading the configuration register clears the High Alert and Low Alert flags
  * - Reading the configuration or temperature result registers clears the Data Ready flag.
  * - Use `set_alert_pin(1)` to monitor the Data_Ready flag on the ALERT pin.
- * - The MOD1 bit cannot be stored in EEPROM. The device can only be programmed to start up in shutdown mode or continuous
- * - conversion mode.
+ * - The MOD1 bit cannot be stored in EEPROM.
+ * - The device can only be programmed to start up in shutdown mode or continuous conversion mode.
  */
 
 #include "tmp117.h"

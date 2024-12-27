@@ -7,31 +7,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-// Original SparkFun TMP117 Arduino Library header:
-
-/******************************************************************************
-  Example3_SetOffsetTemperatureValue.ino
-  Example for the TMP117 I2C Temperature Sensor
-  Madison Chodikov @ SparkFun Electronics
-  May 29 2019
-  ~
-
-  This sketch configures the TMP117 temperature sensor and allows the user to
-  set the offset temperature for System Correction.
-
-  Resources:
-  Wire.h (included with Arduino IDE)
-  SparkFunTMP117.h (included in the src folder) http://librarymanager/All#SparkFun_TMP117
-
-  Development environment specifics:
-  Arduino 1.8.9+
-  Hardware Version 1.0.0
-
-  This code is beerware; if you see me (or any other SparkFun employee) at
-  the local, and you've found our code helpful, please buy us a round!
-
-  Distributed as-is; no warranty is given.
-******************************************************************************/
+// Original SparkFun TMP117 Arduino Library file: Example3_SetOffsetTemperatureValue.ino
 
 /*
  * set_offset.c

@@ -8,47 +8,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-// Original SparkFun TMP117 Arduino Library header:
+// Original SparkFun TMP117 Arduino Library file: Example1_BasicReadings.ino
 
-/******************************************************************************
-  Example1_BasicReadings.ino
-  Example for the TMP117 I2C Temperature Sensor
-  Madison Chodikov @ SparkFun Electronics
-  May 29 2019
-  ~
-
-  This sketch configures the TMP117 temperature sensor and prints the
-  temperature in degrees celsius and fahrenheit with a 500ms delay for
-  easier readings. 
-
-  Resources:
-  Wire.h (included with Arduino IDE)
-  SparkFunTMP117.h (included in the src folder) http://librarymanager/All#SparkFun_TMP117
-
-  Development environment specifics:
-  Arduino 1.8.9+
-  Hardware Version 1.0.0
-
-  This code is beerware; if you see me (or any other SparkFun employee) at
-  the local, and you've found our code helpful, please buy us a round!
-
-  Distributed as-is; no warranty is given.
-******************************************************************************/
-
-/*
-  NOTE: For the most accurate readings:
-  - Avoid heavy bypass traffic on the I2C bus
-  - Use the highest available communication speeds
-  - Use the minimal supply voltage acceptable for the system
-  - Place device horizontally and out of any airflow when storing
-  For more information on reaching the most accurate readings from the sensor,
-  reference the "Precise Temperature Measurements with TMP116" datasheet that is
-  linked on Page 35 of the TMP117's datasheet
-*/
-
-/*** Notes for this new version using the Raspberry Pi Pico/RP2040: ***/
-
-/* temp_result.c
+/* Notes for this new version using the Raspberry Pi Pico/RP2040:
 *
 * This program will print the temperature in Celsius by casting the raw temperature
 * result register to an integer, then scale the Q7 formatted data to two decimal places
@@ -99,7 +61,7 @@ int main(void) {
     // uncomment below to set I2C address other than 0x48 (e.g., 0x49)
     //tmp117_set_address(0x49);
 
-    // Selects I2C instance (i2c0 is set as default in the tmp117.c)
+    // Selects I2C instance (i2c_default is set as default in the tmp117.c)
     //tmp117_set_instance(i2c1); // change to i2c1 as needed
 
     // initialize I2C (default i2c0) and initialize variable with I2C frequency

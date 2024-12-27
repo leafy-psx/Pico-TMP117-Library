@@ -8,35 +8,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-// Original SparkFun TMP117 Arduino Library header:
-
-/******************************************************************************
-  Example5_SetAlertModeTemperatureLimits.ino
-  Example for the TMP117 I2C Temperature Sensor
-  Madison Chodikov @ SparkFun Electronics
-  June 11 2019
-  ~
-
-  
-  This sketch can set and get the Alert Function Mode, Low Temperature 
-  Limit, and High Temperature Limit for the sensor. These limits can
-  be set within +/- 256°C. When the temperature goes above/below the 
-  specified temperature limits, it will cause the alert pins to go
-  high. To access these registers, please reference Example 2: Alert Statuses.
-
-  Resources:
-  Wire.h (included with Arduino IDE)
-  SparkFunTMP117.h (included in the src folder) http://librarymanager/All#SparkFun_TMP117
-
-  Development environment specifics:
-  Arduino 1.8.9+
-  Hardware Version 1.0.0
-
-  This code is beerware; if you see me (or any other SparkFun employee) at
-  the local, and you've found our code helpful, please buy us a round!
-
-  Distributed as-is; no warranty is given.
-******************************************************************************/
+// Original SparkFun TMP117 Arduino Library file: Example5_SetAlertModeTemperatureLimits.ino
 
 #include "tmp117.h"
 #include "tmp117_registers.h"

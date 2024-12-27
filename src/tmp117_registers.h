@@ -7,27 +7,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-// Original SparkFun TMP117 Arduino Library header:
-
-/******************************************************************************
-SparkFun_TMP117_Registers.h
-TMP117 Library - TMP117 Register Map
-Madison Chodikov @ SparkFun Electronics
-Original Creation Date: April 19, 2019
-https://github.com/sparkfunX/Qwiic_TMP117
-
-This file defines all registers internal to the TMP117 sensor.
-
-Development environment specifics:
-    IDE: Arduino 1.8.9
-    Hardware Platform: Arduino Uno
-    TMP117 Breakout Version: 1.0.0
-
-This code is beerware; if you see me (or any other SparkFun employee) at the
-local, and you've found our code helpful, please buy us a round!
-
-Distributed as-is; no warranty is given.
-******************************************************************************/
+// Original SparkFun TMP117 Arduino Library file: SparkFun_TMP117_Registers.h
 
 // This version is for use as an INTERFACE library to the Raspberry Pi Pico SDK
 

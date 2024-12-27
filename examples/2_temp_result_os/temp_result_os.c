@@ -1,4 +1,4 @@
-// temp_result.c
+// temp_result_os.c
 /**
  * Copyright (c) 2024 breaker
  *

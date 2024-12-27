@@ -7,29 +7,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-// Original SparkFun TMP117 Arduino Library header:
-
-/******************************************************************************
-SparkFunTMP117.cpp
-SparkFunTMP117 Library Source File
-Madison Chodikov @ SparkFun Electronics
-Original Creation Date: April 22, 2019
-https://github.com/sparkfun/SparkFun_TMP117_Arduino_Library
-
-This file implements all functions of the TMP117 class. Functions here range
-from reading the temperature from the sensor, to reading and writing various
-settings in the sensor.
-
-Development environment specifics:
-	IDE: Arduino 1.8.9
-	Hardware Platform: Arduino Uno
-	TMP117 Breakout Version: 1.0.0
-
-This code is beerware; if you see me (or any other SparkFun employee) at the
-local, and you've found our code helpful, please buy us a round!
-
-Distributed as-is; no warranty is given.
-******************************************************************************/
+// Original SparkFun TMP117 Arduino Library file: SparkFunTMP117.cpp
 
 // This version is for use as an INTERFACE library to the Raspberry Pi Pico SDK
 

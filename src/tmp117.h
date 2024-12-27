@@ -7,27 +7,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-// Original SparkFun TMP117 Arduino Library header:
-
-/******************************************************************************
-SparkFunTMP117.h
-SparkFunTMP117 Library Header File
-Madison Chodikov @ SparkFun Electronics
-Original Creation Date: April 29, 2016
-https://github.com/sparkfunX/Qwiic_TMP117
-
-This file prototypes the TMP117 class, implemented in SparkFunTMP117.cpp.
-
-Development environment specifics:
-	IDE: Arduino 1.8.9
-	Hardware Platform: Arduino Uno
-	TMP117 Breakout Version: 1.0.0
-
-This code is beerware; if you see me (or any other SparkFun employee) at the
-local, and you've found our code helpful, please buy us a round!
-
-Distributed as-is; no warranty is given.
-******************************************************************************/
+// Original SparkFun TMP117 Arduino Library file: SparkFunTMP117.h
 
 /* A big thank you Madison Chodikov @ SparkFun Electronics for writing the SparkFun TMP117 Qwiic Arduino library
  * This is my attempt at a port for the Raspberry Pi Pico using the Raspberry Pi Pico C/C++ SDK (interface library type).

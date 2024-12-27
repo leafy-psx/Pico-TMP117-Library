@@ -52,7 +52,7 @@ int main(void) {
     // a little delay to ensure serial line stability
     sleep_ms(SERIAL_INIT_DELAY_MS);
     
-    // Selects I2C instance (i2c0 is set as default in the tmp117.c)
+    // Selects I2C instance (i2c_default is set as default in the tmp117.c)
     //tmp117_set_instance(i2c1); // change to i2c1 as needed
 
     // initialize I2C
