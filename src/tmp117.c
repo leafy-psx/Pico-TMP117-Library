@@ -395,6 +395,20 @@ void set_oneshot_mode(void) {
 }
 
 /**
+ * @brief Get the Therm/Alert mode (T/nA) value from the TMP117 configuration register.
+ * 
+ * This function reads the Therm/Alert mode select field (bit 4) from the TMP117 configuration register:
+ * - `1`: Therm mode.
+ * - `0`: Alert mode.
+ * 
+ * @return bool The Therm/Alert mode (`true` for Therm mode, `false` for Alert mode).
+ */
+bool get_thermalert_mode(void) {
+    uint16_t configuration_register = read_register(TMP117_CONFIGURATION);
+    return (configuration_register >> 4) & 0x01;
+}
+
+/**
  * @brief Sets Therm or Alert mode (T/nA bit in Configuration Register).
  * 
  * This function configures the TMP117 alert mode by setting or clearing bit 4:
@@ -496,20 +510,6 @@ void set_alert_pin(tmp117_alert_pin_select_t set_alert_pin) {
 }
 
 /**
- * @brief Get the Therm/Alert mode (T/nA) value from the TMP117 configuration register.
- * 
- * This function reads the Therm/Alert mode select field (bit 4) from the TMP117 configuration register:
- * - `1`: Therm mode.
- * - `0`: Alert mode.
- * 
- * @return bool The Therm/Alert mode (`true` for Therm mode, `false` for Alert mode).
- */
-bool get_thermalert_mode(void) {
-    uint16_t configuration_register = read_register(TMP117_CONFIGURATION);
-    return (configuration_register >> 4) & 0x01;
-}
-
-/**
  * @brief Get the Conversion Averaging Mode (AVG[1:0]) from the Configuration Register
  * 
  * This function retrieves the Conversion Averaging mode bits (AVG[1:0]) from the TMP117 configuration register. 
@@ -519,8 +519,7 @@ bool get_thermalert_mode(void) {
  */
 uint8_t get_conversion_averaging_mode(void) {
     uint16_t configuration_register = read_register(TMP117_CONFIGURATION);
-    // Extract bits 6 and 5 using bitwise operations and masking
-    return (configuration_register >> 5) & 0x03;
+    return (configuration_register >> 5) & 0x03; // Extract bits 6 and 5 
 }
 
 /**
