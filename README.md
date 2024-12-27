@@ -1,4 +1,4 @@
-# TMP117 Library for Raspberry Pi Pico C SDK
+# TMP117 Library for Raspberry Pi Pico SDK
 
 This version is designed as an **INTERFACE** library for the Raspberry Pi Pico SDK.
 
