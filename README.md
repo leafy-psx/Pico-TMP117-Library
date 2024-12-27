@@ -62,7 +62,7 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
 ---
 
 ## I2C Details
-- Ensure your I2C board has **pullups**, otherwise add some per datasheet, probably in the 2.2k-4.7k ohm range.
+- Ensure your I2C board has **pullups**, or add them, probably in the 2.2k-4.7k ohm range.
 - Possible TMP117 I2C addresses: **0x48, 0x49, 0x4A, 0x4B** (set via jumpers on the SparkFun board).  
   Default address is **0x48** unless changed using the `set_address()` function.
 - Use `tmp117_set_instance()` to easily change I2C instance instead of using a board file, if desired.
