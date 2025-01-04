@@ -77,6 +77,19 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
 
 ---
 
+## Building the examples
+'''bash
+git clone https://github.com/leafy-psx/Pico-TMP117-Library.git
+cd Pico-TMP117-Library
+mkdir build && cd build
+cmake -DPICO_PLATFORM=rp2040 -DPICO_BOARD=pico -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Release ..
+make -j$(nproc)
+'''
+
+Or navigate to an individual example directory and run make there.
+
+---
+
 ## Acknowledgments
 Thank you to Madison Chodikov @ SparkFun Electronics for writing the original SparkFun TMP117 Qwiic Arduino library and board design. Thanks to kilograham and all contributors to the Raspberry Pi Pico SDK.
 

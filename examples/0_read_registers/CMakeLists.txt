@@ -1,9 +1,6 @@
 # Example 0 (tmp117/examples/0_register_readout/CMakeLists.txt)
 add_executable(read_registers read_registers.c)
 
-# link to load in SRAM not flash
-#pico_set_binary_type(read_registers no_flash)
-
 # pull in common dependencies and additional i2c hardware support
 target_link_libraries(read_registers PRIVATE tmp117_functions pico_stdlib hardware_i2c pico_printf)
 
