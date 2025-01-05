@@ -4,7 +4,10 @@
 add_library(tmp117_functions INTERFACE)
 
 # Add the source file tmp117.c to the tmp117_functions interface
-target_sources(tmp117_functions INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/tmp117.c)
+target_sources(tmp117_functions INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/tmp117.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/lcd.c
+)
 
 # Add the current source directory to the include path for tmp117_functions
 target_include_directories(tmp117_functions INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
