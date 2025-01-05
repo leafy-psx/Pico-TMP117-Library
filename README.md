@@ -21,7 +21,7 @@ Based on the **SparkFun TMP117 Arduino Library** by Madison Chodikov, this libra
 ## Library Notes
 
 ### Examples
-- **13 Examples** are provided, some within the same directory.
+- **14 Examples** are provided, some within the same directory.
 - Tested successfully with **Pico SDK 2.1.0** for both RP2040 and RP2350 boards.
 - Default board file I2C and UART pins are used. Configure the alert interrupt pin in examples if needed.
 
