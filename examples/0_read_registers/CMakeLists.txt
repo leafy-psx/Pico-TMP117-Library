@@ -8,8 +8,8 @@ target_link_libraries(read_registers PRIVATE tmp117_functions pico_stdlib hardwa
 target_include_directories(read_registers PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 # enable usb output, disable uart output
-#pico_enable_stdio_usb(read_registers 1)
-#pico_enable_stdio_uart(read_registers 0)
+pico_enable_stdio_usb(read_registers 1)
+pico_enable_stdio_uart(read_registers 0)
 
 # create map/bin/hex file etc.
 pico_add_extra_outputs(read_registers)
