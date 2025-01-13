@@ -77,7 +77,14 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
 
 ---
 
-## Building the examples
+## Using with the Raspberry Pico VS Code Extension
+- Open command pallet and do `Git: Clone`
+- Then simply open the `Pico-TMP117-Library` folder from VS Code.
+- Use the CMake Tools extension to specify build and run targets.
+
+---
+
+## Building the examples from bash on Linux
 ```bash
 git clone https://github.com/leafy-psx/Pico-TMP117-Library.git
 cd Pico-TMP117-Library
