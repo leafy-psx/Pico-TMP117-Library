@@ -12,10 +12,7 @@ typedef struct {
     uint8_t data_pins[4]; // Data pins (D4-D7 for 4-bit mode)
 } LCD_Config;
 
-// Initializes the LCD with the specified pin configuration
 void lcd_pin_init(LCD_Config *config);
-
-//void lcd_gpio_init(void);
 void lcd_pulse_enable(void);
 void lcd_send_nibble(uint8_t nibble);
 void lcd_send_byte(uint8_t rs, uint8_t data);
