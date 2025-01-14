@@ -212,13 +212,15 @@ void lcd_msg(void) {
         .data_pins = {LCD_D4, LCD_D5, LCD_D6, LCD_D7}
     };
 
+    // bitmap for custom degree symbol character
     uint8_t degree_symbol[8] = {0x1C, 0x14, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00};
 
     // Initialize the LCD with the specified pins
     lcd_pin_init(&my_lcd_config);
     lcd_init();
     lcd_create_char(0, degree_symbol);  // Create custom degree symbol character
-    // Static text
+    
+    // set cursor and display static text
     lcd_set_cursor(0, 0);  // Row 0, Col 0
     lcd_print("Temperature:");
     lcd_set_cursor(1, 8);  // Row 1, Col 8 (allow for temperature of 7 characters and a space)

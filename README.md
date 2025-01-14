@@ -35,7 +35,7 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
 
 ---
 
-### Key Features
+### Features
 1. **Defined Types and Enumerations**: Many function parameters now use types and enumerations for clarity. See `tmp117.h` for details.
 2. **Efficient Register Reads**: The `read_register` function tracks the last pointer register written to. This avoids unnecessary writes to the pointer register.
 3. **EEPROM Writes**: Writes to registers are **volatile** unless EEPROM programming is used.
@@ -46,7 +46,7 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
    - SMBus alert response example.
    - EEPROM programming functions and examples.
 
-### Handling Flags and One-Shot Mode
+### Notes for handling flags and one-hhot mode
 - Reading the **configuration register** clears the **high alert** and **low alert** flags.
 - Reading the **temperature result** or **configuration register** clears the **data ready flag**.
 - In **one-shot mode**, ensure the temperature register is not read before the configuration register to avoid prematurely clearing the data ready flag.
@@ -70,6 +70,14 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
 **Note**: The device requires **1.5 ms** to power up before conversions can begin.
 
 ---
+
+## serial interfaces
+- Default serial is USB CDC, comment out the below in each `CMakeLists.txt` to use default UART
+```CMake
+# Enable USB output, disable UART output for set_alert_mode_temp_limits (optional)
+pico_enable_stdio_usb(set_alert_mode_temp_limits 1)
+pico_enable_stdio_uart(set_alert_mode_temp_limits 0)
+```
 
 ## File Structure
 - `/src` - Library source and header files.
