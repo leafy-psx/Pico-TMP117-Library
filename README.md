@@ -74,7 +74,7 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
 ## serial interfaces
 - Default serial is USB CDC, comment out the below in each `CMakeLists.txt` to use default UART
 ```CMake
-# Enable USB output, disable UART output for set_alert_mode_temp_limits (optional)
+# Enable USB output, disable UART output
 pico_enable_stdio_usb(set_alert_mode_temp_limits 1)
 pico_enable_stdio_uart(set_alert_mode_temp_limits 0)
 ```
