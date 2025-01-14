@@ -11,8 +11,8 @@ target_link_libraries(eeprom PRIVATE tmp117_functions
 target_include_directories(eeprom PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 # enable usb output, disable uart output
-# pico_enable_stdio_usb(eeprom 1)
-# pico_enable_stdio_uart(eeprom 0)
+pico_enable_stdio_usb(eeprom 1)
+pico_enable_stdio_uart(eeprom 0)
 
 # create map/bin/hex file etc.
 pico_add_extra_outputs(eeprom)

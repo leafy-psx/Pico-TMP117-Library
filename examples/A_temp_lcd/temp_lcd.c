@@ -7,10 +7,30 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
+// based on SparkFun TMP117 Arduino Library file: Example1_BasicReadings.ino
 
-// HD44780 16x2 character LCD display version
-
-// Original SparkFun TMP117 Arduino Library file: Example1_BasicReadings.ino
+/* HD44780 16x2 Character LCD Display (4-bit mode)
+ * Wiring Diagram for a 16-pin, 5V DC Character LCD using the HD44780 Controller
+ *
+ * Connections:
+ * Pico <--> LCD
+ * - VBUS       <--> 5V DC rail
+ * - GND        <--> GND rail
+ * - GND rail   <--> LCD pins: 16 (backlight cathode), 5 (RW), 1 (logic GND), potentiometer (leg 1)
+ * - Potentiometer wiper <--> LCD pin 3 (contrast adjustment, VO)
+ * - 5V DC rail <--> LCD pins: 15 (backlight anode), 2 (logic VDD), potentiometer (leg 3)
+ * - Pico GPIO pins (user-defined in code) <--> LCD pins:
+ *      - RS  (Register Select)
+ *      - EN  (Enable)
+ *      - D7, D6, D5, D4 (Data lines for 4-bit mode)
+ *
+ * Notes:
+ * 1. This configuration assumes the LCD is used in read-only mode (RW tied to GND).
+ *    If bidirectional communication is required, use a voltage divider or logic level 
+ *    shifter to safely interface 5V signals with the Pico's 3.3V GPIO.
+ * 2. Ensure the backlight is powered correctly to avoid damage.
+ * 3. The potentiometer allows contrast adjustment by controlling the voltage on pin 3 (VO).
+ */
 
 /* Notes for this new version using the Raspberry Pi Pico/RP2040:
 *
@@ -34,7 +54,6 @@
 * - Reading the configuration or temperature result registers clears the Data Ready flag.
 */
 
-// GPIO mapping for LCD is in src/lcd.h - edit that file to change pins for LCD drive
 #include "lcd.h"
 #include "tmp117.h"
 #include "tmp117_registers.h"
@@ -48,8 +67,16 @@
 #define SERIAL_INIT_DELAY_MS 1000 // adjust as needed to mitigate garbage characters after serial interface is started
 #define TMP117_I2C_SDA_PIN PICO_DEFAULT_I2C_SDA_PIN // set to a different SDA pin as needed
 #define TMP117_I2C_SCL_PIN PICO_DEFAULT_I2C_SCL_PIN // set to a different SCL pin as needed
-#define TMP117_OFFSET_VALUE -25.0f  // temperature offset in degrees C set by user (try negative values for testing)
+#define TMP117_OFFSET_VALUE -130.0f  // temperature offset in degrees C set by user (try negative values for testing)
 #define TMP117_CONVERSION_DELAY_MS 1000 // Adjust the delay based on conversion cycle time and preference
+
+// LCD GPIO mapping, edit as desired to match your wiring.
+#define LCD_RS  10   // Register Select
+#define LCD_EN  11   // Enable
+#define LCD_D4  18   // Data pin 4
+#define LCD_D5  19   // Data pin 5
+#define LCD_D6  20   // Data pin 6
+#define LCD_D7  21   // Data pin 7
 
 void check_i2c(void);
 void check_status(void);
@@ -59,13 +86,15 @@ void lcd_msg(void);
 uint frequency = 0;
 
 int main(void) {
-    // initialize chosen interface
+
+    // initialize chosen serial interface
     stdio_init_all();
     // a little delay to ensure serial line stability
     sleep_ms(SERIAL_INIT_DELAY_MS);
-
+    // message for serial
     printf("Temperature readings on 16x2 character LCD\n");
 
+    // LCD init and display characters that never change
     lcd_msg();
 
     // uncomment below to set I2C address other than 0x48 (e.g., 0x49)
@@ -74,7 +103,7 @@ int main(void) {
     // Selects I2C instance (i2c_default is set as default in the tmp117.c)
     //tmp117_set_instance(i2c1); // change to i2c1 as needed
 
-    // initialize I2C (default i2c0) and initialize variable with I2C frequency
+    // initialize I2C (default i2c_default) and initialize variable with I2C frequency
     frequency = i2c_init(i2c_instance, 400 * 1000); // TMP117 400 kHz max.
 
     // configure the GPIO pins for I2C
@@ -89,6 +118,9 @@ int main(void) {
 
     // TMP117 software reset; loads EEPROM Power On Reset values
     soft_reset();
+
+    // uncomment to test with a temperature offset
+    //set_temp_offset(TMP117_OFFSET_VALUE);
 
     while (1) {
 
@@ -106,12 +138,12 @@ int main(void) {
 
         // Format the temperature as "integer.decimal"
         sprintf(buffer, "%d.%02d", integer, decimal); // Ensure two decimal places
-
+        // move LCD cursor to lower row, left column
         lcd_set_cursor(1, 0);  // Row 1, Col 0
         // Print the formatted temperature string to the LCD
         lcd_print(buffer);
 
-        // Display the temperature in degrees Celsius to the serial monitor
+        // Also display the temperature in degrees Celsius to the serial monitor
         printf("Temperature: %d.%02d °C\n", integer, decimal);
 
         // floating point functions are also available for converting temp_result to Cesius or Fahrenheit
@@ -172,9 +204,25 @@ void check_i2c(void) {
 
 // LCD init and display characters that never change
 void lcd_msg(void) {
+
+    // Define LCD GPIO pin assignments
+    LCD_Config my_lcd_config = {
+        .rs_pin = LCD_RS,
+        .enable_pin = LCD_EN,
+        .data_pins = {LCD_D4, LCD_D5, LCD_D6, LCD_D7}
+    };
+
+    uint8_t degree_symbol[8] = {0x1C, 0x14, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+    // Initialize the LCD with the specified pins
+    lcd_pin_init(&my_lcd_config);
     lcd_init();
+    lcd_create_char(0, degree_symbol);  // Create custom degree symbol character
+    // Static text
     lcd_set_cursor(0, 0);  // Row 0, Col 0
     lcd_print("Temperature:");
-    lcd_set_cursor(1, 7);  // Row 0, Col 7
-    lcd_print("degrees C");
+    lcd_set_cursor(1, 8);  // Row 1, Col 8 (allow for temperature of 7 characters and a space)
+    //lcd_send_byte(1, 0xDF);  // Display degree symbol using character code (A00 ROM)
+    lcd_send_byte(1, 0x00);  // Display custom degree symbol character
+    lcd_print("C");
 }

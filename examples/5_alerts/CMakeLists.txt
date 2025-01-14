@@ -8,8 +8,8 @@ target_link_libraries(alerts PRIVATE tmp117_functions pico_stdlib hardware_i2c p
 target_include_directories(alerts PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 # Enable USB output, disable UART output (optional)
-# pico_enable_stdio_usb(alerts 1)
-# pico_enable_stdio_uart(alerts 0)
+pico_enable_stdio_usb(alerts 1)
+pico_enable_stdio_uart(alerts 0)
 
 # Create map/bin/hex file for alerts
 pico_add_extra_outputs(alerts)
@@ -24,8 +24,8 @@ target_link_libraries(set_alert_mode_temp_limits PRIVATE tmp117_functions pico_s
 target_include_directories(set_alert_mode_temp_limits PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 # Enable USB output, disable UART output for set_alert_mode_temp_limits (optional)
-# pico_enable_stdio_usb(set_alert_mode_temp_limits 1)
-# pico_enable_stdio_uart(set_alert_mode_temp_limits 0)
+pico_enable_stdio_usb(set_alert_mode_temp_limits 1)
+pico_enable_stdio_uart(set_alert_mode_temp_limits 0)
 
 # Create map/bin/hex file for set_alert_mode_temp_limits
 pico_add_extra_outputs(set_alert_mode_temp_limits)

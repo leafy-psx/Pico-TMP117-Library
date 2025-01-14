@@ -7,8 +7,8 @@ target_link_libraries(alert_smbus PRIVATE tmp117_functions pico_stdlib hardware_
 target_include_directories(alert_smbus PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 # enable usb output, disable uart output
-# pico_enable_stdio_usb(alert_smbus 1)
-# pico_enable_stdio_uart(alert_smbus 0)
+pico_enable_stdio_usb(alert_smbus 1)
+pico_enable_stdio_uart(alert_smbus 0)
 
 # create map/bin/hex file etc.
 pico_add_extra_outputs(alert_smbus)

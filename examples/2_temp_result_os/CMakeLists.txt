@@ -11,12 +11,12 @@ target_include_directories(temp_result_os PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(temp_result_os_interrupt PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 # enable usb output, disable uart output
-#pico_enable_stdio_usb(temp_result_os 1)
-#pico_enable_stdio_uart(temp_result_os 0)
+pico_enable_stdio_usb(temp_result_os 1)
+pico_enable_stdio_uart(temp_result_os 0)
 
 # enable usb output, disable uart output
-#pico_enable_stdio_usb(temp_result_os_interrupt 1)
-#pico_enable_stdio_uart(temp_result_os_interrupt 0)
+pico_enable_stdio_usb(temp_result_os_interrupt 1)
+pico_enable_stdio_uart(temp_result_os_interrupt 0)
 
 # create map/bin/hex file etc.
 pico_add_extra_outputs(temp_result_os)

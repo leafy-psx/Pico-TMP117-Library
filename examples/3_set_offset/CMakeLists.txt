@@ -7,8 +7,8 @@ target_link_libraries(set_offset PRIVATE tmp117_functions pico_stdlib hardware_w
 target_include_directories(set_offset PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 # enable usb output, disable uart output
-# pico_enable_stdio_usb(set_offset 1)
-# pico_enable_stdio_uart(set_offset 0)
+pico_enable_stdio_usb(set_offset 1)
+pico_enable_stdio_uart(set_offset 0)
 
 # create map/bin/hex file etc.
 pico_add_extra_outputs(set_offset)

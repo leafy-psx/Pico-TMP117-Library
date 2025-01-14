@@ -9,5 +9,6 @@ add_subdirectory(6_set_conversion_cycle_time)
 add_subdirectory(7_alert_smbus)
 add_subdirectory(8_NIST-ID)
 add_subdirectory(9_eeprom)
+add_subdirectory(A_temp_lcd)
 
 message(STATUS "END tmp117/examples/CMakeLists.txt")

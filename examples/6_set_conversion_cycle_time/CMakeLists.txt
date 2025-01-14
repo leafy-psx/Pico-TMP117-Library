@@ -7,8 +7,8 @@ target_link_libraries(set_conversion_avg_cycle PRIVATE tmp117_functions pico_std
 # target_include_directories(set_conversion_avg_cycle.c PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 # enable usb output, disable uart output
-# pico_enable_stdio_usb(set_conversion_avg_cycle 1)
-# pico_enable_stdio_uart(set_conversion_avg_cycle 0)
+pico_enable_stdio_usb(set_conversion_avg_cycle 1)
+pico_enable_stdio_uart(set_conversion_avg_cycle 0)
 
 # create map/bin/hex file etc.
 pico_add_extra_outputs(set_conversion_avg_cycle)
