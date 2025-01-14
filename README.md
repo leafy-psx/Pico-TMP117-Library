@@ -79,6 +79,8 @@ pico_enable_stdio_usb(set_alert_mode_temp_limits 1)
 pico_enable_stdio_uart(set_alert_mode_temp_limits 0)
 ```
 
+---
+
 ## File Structure
 - `/src` - Library source and header files.
 - `/examples` - Example applications for testing and demonstration.
