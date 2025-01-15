@@ -68,7 +68,7 @@
 #define TMP117_I2C_SDA_PIN PICO_DEFAULT_I2C_SDA_PIN // set to a different SDA pin as needed
 #define TMP117_I2C_SCL_PIN PICO_DEFAULT_I2C_SCL_PIN // set to a different SCL pin as needed
 #define TMP117_OFFSET_VALUE -130.0f  // temperature offset in degrees C set by user (try negative values for testing)
-#define TMP117_CONVERSION_DELAY_MS 1000 // Adjust the delay based on conversion cycle time and preference
+#define TMP117_CONVERSION_DELAY_MS 4000 // Adjust the delay based on conversion cycle time and preference
 
 // LCD to GPIO mapping, edit as desired to match your wiring.
 #define LCD_RS  10   // Register Select
@@ -134,20 +134,25 @@ int main(void) {
         int temp = read_temp_raw() * 100 >> 7;
         int integer = temp / 100;
         int decimal = (temp < 0 ? -temp : temp) % 100;
+        float temp_float = temp / 100.0;
         char buffer[8] = {0}; // Buffer to hold the formatted temperature string
 
-        // Format the temperature as "integer.decimal"
+        // Format the temperature in Celsius as "integer.decimal"
         sprintf(buffer, "%d.%02d", integer, decimal); // Ensure two decimal places
-        // move LCD cursor to lower row, left column
         lcd_set_cursor(1, 0);  // Row 1, Col 0
-        // Print the formatted temperature string to the LCD
-        lcd_print(buffer);
+        lcd_print(buffer);     // Print the formatted temperature string to the LCD
 
-        // Also display the temperature in degrees Celsius to the serial monitor
-        printf("Temperature: %d.%02d °C\n", integer, decimal);
+        // display the temperature in Fahrenheit
+        float temp_fahrenheit = calc_temp_fahrenheit(temp_float);
+        sprintf(buffer, "%.02f", temp_fahrenheit);
+        lcd_set_cursor(0, 0);  // Row 0, Col 0
+        lcd_print(buffer);     // Print the formatted temperature string to the LCD
 
-        // floating point functions are also available for converting temp_result to Cesius or Fahrenheit
-        //printf("\nTemperature: %.2f °C\t%.2f °F", read_temp_celsius(), read_temp_fahrenheit());
+        // Also print the temperature in degrees Celsius to the serial monitor
+        //printf("Temperature: %d.%02d °C\n", integer, decimal);
+
+        // Or, print the temperature in degrees Celsius, and degrees Fahrenheit
+        printf("Temperature: %d.%02d °C \t%.02f °F\n", temp / 100, (temp < 0 ? -temp : temp) % 100, temp_fahrenheit);
     }
 
     return 0;
@@ -221,8 +226,10 @@ void lcd_msg(void) {
     lcd_create_char(0, degree_symbol);  // Create custom degree symbol character
     
     // set cursor and display static text
-    lcd_set_cursor(0, 0);  // Row 0, Col 0
-    lcd_print("Temperature:");
+    lcd_set_cursor(0, 8);  // Row 0, Col 0
+    lcd_send_byte(1, 0x00);  // Display custom degree symbol character
+    lcd_print("F");
+    //lcd_print("Temperature:");
     lcd_set_cursor(1, 8);  // Row 1, Col 8 (allow for temperature of 7 characters and a space)
     //lcd_send_byte(1, 0xDF);  // Display degree symbol using character code (A00 ROM)
     lcd_send_byte(1, 0x00);  // Display custom degree symbol character
