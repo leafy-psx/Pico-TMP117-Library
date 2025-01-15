@@ -70,7 +70,7 @@
 #define TMP117_OFFSET_VALUE -130.0f  // temperature offset in degrees C set by user (try negative values for testing)
 #define TMP117_CONVERSION_DELAY_MS 1000 // Adjust the delay based on conversion cycle time and preference
 
-// LCD GPIO mapping, edit as desired to match your wiring.
+// LCD to GPIO mapping, edit as desired to match your wiring.
 #define LCD_RS  10   // Register Select
 #define LCD_EN  11   // Enable
 #define LCD_D4  18   // Data pin 4
