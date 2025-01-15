@@ -81,6 +81,7 @@
 void check_i2c(void);
 void check_status(void);
 void lcd_msg(void);
+uint32_t get_conversion_delay(void);
 
 // variable for checking I2C frequency
 uint frequency = 0;
@@ -122,10 +123,22 @@ int main(void) {
     // uncomment to test with a temperature offset
     //set_temp_offset(TMP117_OFFSET_VALUE);
 
+     // set continuous conversion mode if EEPROM has been set to shutdown mode
+    uint8_t conversion_mode = get_conversion_mode();
+    if (conversion_mode != 0)
+        set_continuous_conversion_mode();
+
+    // test different conversion cycle times, see Table 7-7 of the datasheet
+    set_conversion_cycle(CONV_4_S);     // set desired cycle time
+    set_averaging_mode(AVG_32);         // set desired averaging mode
+
+    // get conversion delay based on conversion cycle and averaging bits
+    uint32_t delay_ms = get_conversion_delay();
+
     while (1) {
 
         do {
-            sleep_ms(TMP117_CONVERSION_DELAY_MS);
+            sleep_ms(delay_ms);
         } while (!data_ready()); // check if the data ready flag is high
 
         /* 1) typecast temp_result register to integer, converting from two's complement
@@ -135,6 +148,7 @@ int main(void) {
         int integer = temp / 100;
         int decimal = (temp < 0 ? -temp : temp) % 100;
         float temp_float = temp / 100.0;
+        float temp_fahrenheit = calc_temp_fahrenheit(temp_float);
         char buffer[8] = {0}; // Buffer to hold the formatted temperature string
 
         // Format the temperature in Celsius as "integer.decimal"
@@ -142,17 +156,18 @@ int main(void) {
         lcd_set_cursor(1, 0);  // Row 1, Col 0
         lcd_print(buffer);     // Print the formatted temperature string to the LCD
 
-        // display the temperature in Fahrenheit
-        float temp_fahrenheit = calc_temp_fahrenheit(temp_float);
-        sprintf(buffer, "%.02f", temp_fahrenheit);
+        // Format and display the temperature in Fahrenheit
+        sprintf(buffer, "%.02f", temp_fahrenheit); // Ensure two decimal places
         lcd_set_cursor(0, 0);  // Row 0, Col 0
         lcd_print(buffer);     // Print the formatted temperature string to the LCD
 
-        // Also print the temperature in degrees Celsius to the serial monitor
+        // Also print the temperature in Celsius, and Fahrenheit to serial
+        printf("Temperature: %d.%02d °C \t%.02f °F\n", integer, decimal, temp_fahrenheit);
+
+        // Or, also print the temperature in degrees Celsius to the serial monitor
         //printf("Temperature: %d.%02d °C\n", integer, decimal);
 
-        // Or, print the temperature in degrees Celsius, and degrees Fahrenheit
-        printf("Temperature: %d.%02d °C \t%.02f °F\n", temp / 100, (temp < 0 ? -temp : temp) % 100, temp_fahrenheit);
+
     }
 
     return 0;
@@ -235,3 +250,31 @@ void lcd_msg(void) {
     lcd_send_byte(1, 0x00);  // Display custom degree symbol character
     lcd_print("C");
 }
+
+// Determine conversion delay based on the conversion cycle time and averaging mode bits
+// See Table 7-7 of the datasheet
+uint32_t get_conversion_delay(void) {
+
+    // Read configuration register
+    uint16_t configuration_register = read_register(TMP117_CONFIGURATION);
+
+    // extract CONV[2:0] and AVG[1:0] bit values of configuration register
+    uint8_t conv = (configuration_register >> 7) & 0x07; // Bits 9, 8, 7
+    uint8_t avg = (configuration_register >> 5) & 0x03; // Bits 6 and 5
+
+    // Conversion time table in ms of datasheet Table 7-7 (16 is in place of 15.5)
+    const uint32_t conversion_cycle_times[8][4] = {
+        {16, 125, 500, 1000},
+        {125, 125, 500, 1000},
+        {250, 250, 500, 1000},
+        {500, 500, 500, 1000},
+        {1000, 1000, 1000, 1000},
+        {4000, 4000, 4000, 4000},
+        {8000, 8000, 8000, 8000},
+        {16000, 16000, 16000, 16000}
+    };
+
+    // Return conversion time based on AVG and CONV values
+    return conversion_cycle_times[conv][avg];
+}
+
