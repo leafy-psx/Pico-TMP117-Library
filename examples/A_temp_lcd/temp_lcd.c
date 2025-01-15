@@ -10,7 +10,7 @@
 // based on SparkFun TMP117 Arduino Library file: Example1_BasicReadings.ino
 
 /* HD44780 16x2 Character LCD Display (4-bit mode)
- * Wiring Diagram for a 16-pin, 5V DC Character LCD using the HD44780 Controller
+ * Wiring for a 16-pin, 5V DC Character LCD using the HD44780 Controller
  *
  * Connections:
  * Pico <--> LCD
@@ -212,7 +212,7 @@ void lcd_msg(void) {
         .data_pins = {LCD_D4, LCD_D5, LCD_D6, LCD_D7}
     };
 
-    // bitmap for custom degree symbol character
+    // bitmap for custom degree symbol character (same as 0xDF of A00 ROM)
     uint8_t degree_symbol[8] = {0x1C, 0x14, 0x1C, 0x00, 0x00, 0x00, 0x00, 0x00};
 
     // Initialize the LCD with the specified pins
