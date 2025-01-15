@@ -93,21 +93,21 @@ int main() {
     // After the alert pin asserts, send the SMBus Alert Response before reading the configuration register
     result = send_smbus_alert();
 
-    read_register(TMP117_CONFIGURATION); // A read of the configuration register to deassert Alert pin
+    // A read of the configuration register to deassert Alert pin
+    read_register(TMP117_CONFIGURATION);
 
     alert_asserted = 0;
 
     gpio_put(TMP117_LED_PIN, 0);
 
-    // Display the temperature in degrees Celsius, formatted to show decimal places.
-    // Also, convert to Fahrenheit and display on the same line (uses floating point math).
-    //float temp_float = temp / 100.0;
-    //printf("Temperature: %d.%02d °C \t%.2f °F\t", temp / 100, (temp < 0 ? -temp : temp) % 100, calc_temp_fahrenheit(temp_float));
-
     // read temperature
     int temp = read_temp_raw() * 100 >> 7;
     // Display the temperature in degrees Celsius, formatted to show two decimal places.
     printf("Temperature: %d.%02d °C\t", temp / 100, (temp < 0 ? -temp : temp) % 100);
+
+    // Also, convert to Fahrenheit and display on the same line (uses floating point math).
+    //float temp_float = temp / 100.0;
+    //printf("Temperature: %d.%02d °C \t%.2f °F\t", temp / 100, (temp < 0 ? -temp : temp) % 100, calc_temp_fahrenheit(temp_float));
 
     // extract LSB for high or low flag
     result &= 0x01;
