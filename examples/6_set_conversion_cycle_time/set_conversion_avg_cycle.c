@@ -68,14 +68,14 @@ volatile bool input_available = false; // Flag to indicate if input is available
 volatile char input_char = 0; // Variable to store the input character
 
 // Define function prototypes for character input functions
-void inputCallback();
-char getInputChar();
+void inputCallback(void *param);
+char getInputChar(void);
 
 // Define function prototypes for state-handler functions
-void mainMenu();
-void inputAVG();
-void inputCONV();
-void exitMenu();
+void mainMenu(void);
+void inputAVG(void);
+void inputCONV(void);
+void exitMenu(void);
 
 // Define function prototype for function to convert an integer to an 8-bit binary string
 void conv_to_binary_string(int value, char* binary_string);
@@ -121,13 +121,13 @@ void inputCallback(void *param) {
     input_char = getchar(); // Read the input character
 }
 
-char getInputChar() {
+char getInputChar(void) {
     input_available = false; // Reset the input flag
     return input_char; // Return the input character
 }
 
 // Main menu state-handler function
-void mainMenu() {
+void mainMenu(void) {
     uint8_t cycleBit = 0;  // variable to store the CONV bits state
     uint8_t avg_mode = 0; // variable to store the AVG bits state
 
@@ -182,7 +182,7 @@ void mainMenu() {
 }
 
 // user inputs AVG mode bits
-void inputAVG() {
+void inputAVG(void) {
     uint8_t mode = 0;
 
     printf("\n0 - 3 for the New Averaging Mode: ");
@@ -204,7 +204,7 @@ void inputAVG() {
 }
 
 // user inputs CONV mode bits
-void inputCONV() {
+void inputCONV(void) {
     uint8_t mode = 0;
 
     printf("\n0 - 7 for the New Conversion Cycle Time: ");
@@ -226,7 +226,7 @@ void inputCONV() {
 }
 
 // Exit menu state-handler function
-void exitMenu() {
+void exitMenu(void) {
     printf("\nREBOOT!");
     sleep_ms(500);
     watchdog_reboot(0, 0, 0);  // Reboot the Pico
@@ -260,7 +260,7 @@ const char* convert_avg_mode(int avg_mode) {
 }
 
 // Function to check and display the conversion cycle based on AVG and CONV bits
-const char* display_conversion_time() {
+const char* display_conversion_time(void) {
     // Read configuration register
     uint16_t configReg = read_register(TMP117_CONFIGURATION);
 
