@@ -238,7 +238,8 @@ void lcd_msg(void) {
     // Initialize the LCD with the specified pins
     lcd_pin_init(&my_lcd_config);
     lcd_init();
-    lcd_create_char(0, degree_symbol);  // Create custom degree symbol character
+    // Create custom degree symbol character
+    lcd_create_char(0, degree_symbol);
     
     // set cursor and display static text
     lcd_set_cursor(0, 8);  // Row 0, Col 0
