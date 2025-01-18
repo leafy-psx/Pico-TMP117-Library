@@ -129,7 +129,7 @@ int main(void) {
         set_continuous_conversion_mode();
 
     // test different conversion cycle times, see Table 7-7 of the datasheet
-    set_conversion_cycle(CONV_4_S);     // set desired cycle time
+    set_conversion_cycle(CONV_4_S);     // set desired cycle time (avoid <500ms)
     set_averaging_mode(AVG_32);         // set desired averaging mode
 
     // get conversion delay based on conversion cycle and averaging bits
@@ -242,10 +242,9 @@ void lcd_msg(void) {
     lcd_create_char(0, degree_symbol);
     
     // set cursor and display static text
-    lcd_set_cursor(0, 8);  // Row 0, Col 0
+    lcd_set_cursor(0, 8);  // Row 0, Col 0 (allow for temperature of 7 characters and a space)
     lcd_send_byte(1, 0x00);  // Display custom degree symbol character
     lcd_print("F");
-    //lcd_print("Temperature:");
     lcd_set_cursor(1, 8);  // Row 1, Col 8 (allow for temperature of 7 characters and a space)
     //lcd_send_byte(1, 0xDF);  // Display degree symbol using character code (A00 ROM)
     lcd_send_byte(1, 0x00);  // Display custom degree symbol character
