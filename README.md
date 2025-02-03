@@ -46,7 +46,7 @@ The **16-bit Word** of the `temp_result` register is structured as follows:
    - SMBus alert response example.
    - EEPROM programming functions and examples.
 
-### Notes for handling flags and one-hhot mode
+### Notes for handling flags and one-shot mode
 - Reading the **configuration register** clears the **high alert** and **low alert** flags.
 - Reading the **temperature result** or **configuration register** clears the **data ready flag**.
 - In **one-shot mode**, ensure the temperature register is not read before the configuration register to avoid prematurely clearing the data ready flag.
